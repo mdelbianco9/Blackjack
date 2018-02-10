@@ -1,0 +1,67 @@
+#output {
+	font-size: 1.5rem;
+
+}
+
+.clubs, .spades{
+	color: black;
+}
+
+.hearts, .diams {
+	color: red;
+}
+
+.icard {
+	height: 160px;
+	width: 120px;
+	padding: 3px;
+	border: 1px solid black;
+	background-color: white;
+	border-radius: 10px;
+	position: absolute;
+	left: 100px;
+	display: inline-block;
+}
+
+.top-card {
+	font-size: 30px;
+	line-height: 20px;
+	left: 2px;
+	top: 2px;
+	font-family: 'lato';
+}
+
+.content-card {
+	text-align: center;
+	font-size: 70px;
+}
+
+.bottom-card {
+	font-size: 30px;
+	line-height: 20px;
+	right: 2px;
+	bottom: 2px;
+	font-family: 'lato';
+	transform: rotate(-180deg);
+}
+
+.hearts .suit::after {
+	content: '\2665';
+}
+.diams .suit::after {
+	content: '\2666';
+}
+.spades .suit::after {
+	content: '\2660';
+}
+.clubs .suit::after {
+	content: '\2663';
+}
+
+#dealer, #player {
+	height: 180px;
+	width: 500px;
+}
+
+
+
