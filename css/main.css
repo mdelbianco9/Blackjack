@@ -63,5 +63,57 @@
 	width: 500px;
 }
 
+#cover {
+	height: 160px;
+	width: 120px;
+	background-color: brown;
+	border-radius: 10px;
+	position: absolute;
+	border: 1px solid black;
+	padding: 3px;
+}
+
+#btndeal, #myactions {
+	display: none;
+}
+
+.btn {
+	border-radius: 5px;
+	padding-top: 8px 20px;
+	color: white;
+	display: inline-block;
+	text-align: center;
+	text-shadow: 1px 1px #000000;
+/*	font: normal 700 24px/1 "Calibri, sans-serif";
+*/}
+
+#message {
+	height: 70px;
+	font-size: 30px;
+	text-align: center;
+}
+#btnhold {
+	background-color: red;
+}
+
+#btndouble {
+	background-color: blue;
+}
+
+#btnhit {
+	background-color: green;
+}
+
+#maxbet {
+	background-color: red;
+}
+
+#btnstart {
+	background-color: black;
+}
+
+.total {
+	font-size: 30pxl
+}
 
 
