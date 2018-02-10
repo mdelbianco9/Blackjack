@@ -12,7 +12,10 @@ var playerHolder = document.getElementById('player');
 var dealerHolder = document.getElementById('dealer');
 var playerHolder = document.getElementById('player');
 var cardCount = 0;
-var mydollars = 0;
+var mydollars = 100;
+var endplay = false;
+var pValue = document.getElementById('pValue');
+var dValue = document.getElementById('dValue');
 
 /*Build out deck of cards by looping through arrays and assigning cards
 This for loops essentially builds out deck of cards by creating and object for each card value then 
@@ -99,6 +102,8 @@ function cardOutput(n, x) {
 	return  '<div class="icard '+cards[n].icon+'" style="left:' + hpos + 'px;"><div class="top-card suit"> '+cards[n].cardnum+'<br></div><div class="content-card suit"></div><div class="bottom-card suit">'+cards[n].cardnum+'<br></div></div>';
 }
 
+/* This looks at which Button is clicked (hit, hold or double) then
+based on the value of the onclick the certian case will be seleted. */
 function cardAction(a) {
 	console.log(a);
 	switch (a) {
@@ -120,7 +125,58 @@ function cardAction(a) {
 	}
 }
 
+	function playucard() {
+		playerCard.push(cards[cardCount]);
+		playerHolder.innerHTML += cardOutput(cardCount, 
+		(playerCard.length -1));
+		cardCount++;
 
+		var rValue = checktotal(playerCard);
+		pValue.innerHTML = rValue;
+		if(rValue>21) {
+			message.innerHTML = "busted!";
+			playend();
+		}
+	}
+
+	function playend() {
+		endplay = true;
+		document.getElementById('cover').style.display = "none";
+		document.getElementById('myactions').style.display = "none";
+		document.getElementById('btndeal').style.display = "block";
+		document.getElementById('mybet').disabled = false;
+		document.getElementById('maxbet').disabled = false;
+		message.innerHTML = "Game Over";
+
+		var dealervalue = checktotal(dealerCard);
+		dValue.innerHTML = dealervalue;
+
+		while(dealervalue<17){
+		dealerCard.push(cards[cardCount]);
+		dealerHolder.innerHTML += cardOutput(cardCount, 
+		(dealerCard.length -1));
+		cardCount++;
+		dealervalue = checktotal(dealerCard);
+		dValue.innerHTML = dealervalue;
+		}
+
+	}
+
+	function checktotal(arr){
+		var rValue = 0;
+		var aceAdjust = false;
+		for(var i in arr) {
+			if(arr[i].cardnum == 'A'&& !aceAdjust) {
+				aceAdjust=true;
+				rValue=rValue+10;
+			}
+			rValue=rValue+arr[i].cardvalue;
+		}
+		if(aceAdjust && rValue > 21) {
+			rValue=rValue-10;
+		}
+		return rValue;
+	}
 
 
 /* The shuffleDeck function assigns a random number (j) to be the new index
