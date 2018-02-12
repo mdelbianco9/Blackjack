@@ -16,6 +16,7 @@ var mydollars = 100;
 var endplay = false;
 var pValue = document.getElementById('pValue');
 var dValue = document.getElementById('dValue');
+var dollarValue = document.getElementById('dollars');
 
 /*Build out deck of cards by looping through arrays and assigning cards
 This for loops essentially builds out deck of cards by creating and object for each card value then 
@@ -76,6 +77,7 @@ function dealNew() {
 	console.log(playerCard);
 }
 
+
 function deal() {
 	console.log(cards);
 	// card count reshuffle
@@ -93,8 +95,9 @@ function deal() {
 		playerCard.push(cards[cardCount]);
 		playerHolder.innerHTML += cardOutput(cardCount, x);
 		cardCount++
-
 	}
+
+		rValue.innerHTML = checktotal(playerCard);
 }
 
 function cardOutput(n, x) {
@@ -147,6 +150,7 @@ function cardAction(a) {
 		document.getElementById('mybet').disabled = false;
 		document.getElementById('maxbet').disabled = false;
 		message.innerHTML = "Game Over";
+		var payoutJack = 1;
 
 		var dealervalue = checktotal(dealerCard);
 		dValue.innerHTML = dealervalue;
@@ -160,8 +164,38 @@ function cardAction(a) {
 		dValue.innerHTML = dealervalue;
 		}
 
+		// who won??
+		var playervalue = checktotal(playerCard);
+		if(playervalue == 21 && playerCard.length ==2) {
+			message.innerHTML = "Player Blackjack";
+			payoutJack = 1.5;
+		}
+
+		var betvalue = parseInt(document.getElementById('mybet').value)*payoutJack;
+
+		if(playervalue < 22 && playervalue > dealervalue || (dealervalue > 21 && playervalue < 21)) {
+			message.innerHTML += '<span style="color:green;">Your win $' +betvalue+'</span>';
+			mydollars = mydollars + (betvalue *2);
+		}
+		else if(playervalue > 21) {
+			message.innerHTML += '<span style="color:red;">dealer Wins' +betvalue+'</span>';
+
+		} 
+		else if (playervalue = dealervalue) {
+			message.innerHTML += '<span style="color:red;">Push</span>';
+			mydollars = mydollars + betvalue;
+		}
+		else {
+			message.innerHTML += '<span style="color:red;">dealer Wins' +betvalue+'</span>';
+		}
+
+
+		pValue.innerHTML = dealervalue;
+		dollarValue.innerHTML = mydollars;
+
 	}
 
+	// This function checks to see if an Ace is 1 or 11
 	function checktotal(arr){
 		var rValue = 0;
 		var aceAdjust = false;
